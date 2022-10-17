@@ -1,15 +1,16 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import { Api } from "../../services/apis/api.js";
 import { StyledMain } from "./style.js";
 import { BtnStyled } from "../../styles/components/styledButton/index.js";
 import { StyledInput } from "../../styles/components/styledInput/index.js";
 import { StyledText } from "../../styles/typography.js";
+import { useContext } from "react";
+import { userContext } from "../../contexts/userContext.js";
+import { Link } from "react-router-dom";
 
 export function RegisterPage() {
-  const navigate = useNavigate();
+  const { createUser } = useContext(userContext);
   const schema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
     email: yup.string().required("Email obrigatório").email("Email inválido"),
@@ -36,19 +37,13 @@ export function RegisterPage() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  function createUser(data) {
-    Api.post("/users", data)
-      .then((res) => navigate("/"))
-      .catch((err) => console.log(err));
-  }
-
   return (
     <StyledMain>
       <div>
         <StyledText typeText="title" color="--Color-primary" tag="h1">
           Kenzie Hub
         </StyledText>
-        <BtnStyled onClick={() => navigate("/")}>Voltar</BtnStyled>
+        <Link to={"/"}>Voltar</Link>
       </div>
       <form onSubmit={handleSubmit(createUser)}>
         <StyledText typeText="title" color="--gray0" tag="h2">
@@ -118,7 +113,9 @@ export function RegisterPage() {
             Quarto módulo
           </option>
         </select>
-        <BtnStyled btnType="btn1">Cadastrar</BtnStyled>
+        <BtnStyled type="submit" btnType="btn1">
+          Cadastrar
+        </BtnStyled>
       </form>
     </StyledMain>
   );

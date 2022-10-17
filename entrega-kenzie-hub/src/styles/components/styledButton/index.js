@@ -11,5 +11,5 @@ export const BtnStyled = styled.button`
   ${({ btnType }) =>
     btnType == "btn1"
       ? "background-color: var(--Color-primary); &:hover {background-color: var(--Color-primary-focus);}"
-      : "background-color: var(--gray1); &:hover {background-color: var(--gray2);}"}
+      : "background-color: var(--gray2); &:hover {background-color: var(--gray1);}"}
 `;

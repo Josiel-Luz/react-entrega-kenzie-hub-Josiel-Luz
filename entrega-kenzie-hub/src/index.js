@@ -5,13 +5,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./styles/global";
+import { UserProvider } from "./contexts/userContext";
+import { TechsProvider } from "./contexts/techsContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <GlobalStyle />
-      <App />
+      <UserProvider>
+        <TechsProvider>
+          <GlobalStyle />
+          <App />
+        </TechsProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

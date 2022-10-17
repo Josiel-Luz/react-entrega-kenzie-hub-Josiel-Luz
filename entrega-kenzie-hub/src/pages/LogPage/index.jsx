@@ -1,15 +1,17 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import { Api } from "../../services/apis/api";
+import { Link } from "react-router-dom";
 import { StyledMain } from "./style";
 import { StyledText } from "../../styles/typography";
 import { StyledInput } from "../../styles/components/styledInput";
 import { BtnStyled } from "../../styles/components/styledButton";
+import { useContext } from "react";
+import { userContext } from "../../contexts/userContext";
 
-export function LoginPage({ setUser }) {
-  const navigate = useNavigate();
+export function LoginPage() {
+  const { login } = useContext(userContext);
+
   const schema = yup.object().shape({
     password: yup.string().required("Nome obrigatório"),
     email: yup.string().required("Email obrigatório").email("email inválido"),
@@ -20,23 +22,12 @@ export function LoginPage({ setUser }) {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  function onSubmit(data) {
-    Api.post("/sessions", data)
-      .then((res) => {
-        setUser(res.data.user);
-        localStorage.setItem("@TOKEN", res.data.token);
-        localStorage.setItem("@USERID", res.data.user.id);
-        navigate("/home");
-      })
-      .catch((err) => console.log(err));
-  }
-
   return (
     <StyledMain>
       <StyledText color="--Color-primary" typeText="title" tag="h1">
         Kenzie Hub
       </StyledText>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(login)}>
         <StyledText color="--gray0" TipeText="title" tag="h2">
           Login
         </StyledText>
@@ -58,7 +49,7 @@ export function LoginPage({ setUser }) {
         <span>{errors.password?.message}</span>
         <BtnStyled btnType="btn1">Entrar</BtnStyled>
         <p>Ainda não possue uma conta?</p>
-        <BtnStyled onClick={() => navigate("/register")}>Cadstre-se</BtnStyled>
+        <Link to={"register"}>Cadastre-se</Link>
       </form>
     </StyledMain>
   );
