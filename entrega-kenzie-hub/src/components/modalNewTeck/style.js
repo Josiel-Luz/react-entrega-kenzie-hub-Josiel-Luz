@@ -1,43 +1,38 @@
 import styled from "styled-components";
 
-export const StyledMain = styled.main`
+export const StyledModal = styled.div`
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: var(--opacity50);
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background-color: var(--gray4);
+  align-items: center;
 
-  a {
-    padding: 10px 20px;
-    border-radius: 4px;
-    border: 2px solid transparent;
-    color: var(--gray0);
-    cursor: pointer;
-    transition: 0.3s;
+  & > div > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 25px;
     background-color: var(--gray2);
 
-    &:hover {
-      background-color: var(--gray1);
+    & > button {
+      background-color: transparent;
+      border: none;
+      color: var(--gray1);
+      cursor: pointer;
     }
-  }
-
-  div {
-    padding: 40px 0;
-    display: flex;
-    width: 90%;
-    align-items: center;
-    justify-content: space-between;
   }
 
   form {
     display: flex;
     flex-direction: column;
     padding: 30px 25px;
-    border-radius: 4px;
     gap: 15px;
     background-color: var(--gray3);
-    margin: 30px 10px;
-    width: 90%;
+    width: 100%;
   }
 
   form > label {
@@ -60,24 +55,8 @@ export const StyledMain = styled.main`
     color: var(--gray0);
   }
 
-  form > p,
-  span {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--gray1);
-  }
-
-  form > p,
-  h2 {
-    text-align: center;
-  }
-
   @media (min-width: 400px) {
     form {
-      width: 350px;
-    }
-
-    div {
       width: 350px;
     }
   }

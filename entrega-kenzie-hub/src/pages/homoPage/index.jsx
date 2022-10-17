@@ -1,15 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { ModalNewTeck } from "../../components/modalNewTeck";
+import { TecnologiList } from "../../components/tecnologiList";
+import { techsContext } from "../../contexts/techsContext";
+import { userContext } from "../../contexts/userContext";
 import { BtnStyled } from "../../styles/components/styledButton";
 import { StyledText } from "../../styles/typography";
 import { StyledHome } from "./style";
 
-export function HomePage({ user }) {
-  const navigate = useNavigate();
-
-  function quit() {
-    localStorage.clear();
-    navigate("/");
-  }
+export function HomePage() {
+  const { user, quit } = useContext(userContext);
+  const { newTech, setNewTech } = useContext(techsContext);
 
   return (
     <StyledHome>
@@ -28,13 +28,21 @@ export function HomePage({ user }) {
         </StyledText>
       </div>
       <div className="description">
-        <StyledText typeText="title" color="--gray0" tag="h2">
+        {/* <StyledText typeText="title" color="--gray0" tag="h2">
           Que pena! Estamos em desenvolvimento :(
         </StyledText>
         <StyledText typeText="text1" color="--gray0" tag="p">
           Nossa aplicação está em desenvolvimento, em breve teremos novidades
+        </StyledText> */}
+        <StyledText typeText="title" color="--gray0" tag="h2">
+          Tecnomlogias
         </StyledText>
+        <BtnStyled className="new-teck" onClick={() => setNewTech(true)}>
+          +
+        </BtnStyled>
       </div>
+      <TecnologiList />
+      {newTech && <ModalNewTeck />}
     </StyledHome>
   );
 }

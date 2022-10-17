@@ -21,6 +21,8 @@ export const GlobalStyle = createGlobalStyle`
         --gray3: #212529;
         --gray4: #121214;
 
+        --opacity50: #00000050;
+
         --Sucess: #3FE864;
         --Negative: #E83F5B;
     }
