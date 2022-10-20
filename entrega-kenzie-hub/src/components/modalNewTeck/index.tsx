@@ -1,28 +1,25 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { techsContext } from "../../contexts/techsContext";
+import { string } from "yup";
+import { iCreateNewTech, techsContext } from "../../contexts/techsContext";
 import { BtnStyled } from "../../styles/components/styledButton";
 import { StyledInput } from "../../styles/components/styledInput";
 import { StyledText } from "../../styles/typography";
 import { StyledModal } from "./style";
 
 export function ModalNewTeck() {
-  const { setNewTech, createNewTech } = useContext(techsContext);
+  const { verifyNewTech, createNewTech } = useContext(techsContext);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<iCreateNewTech>();
+
   return (
-    <StyledModal
-      className="modal"
-      onClick={(event) =>
-        event.target.className.includes("modal") && setNewTech(false)
-      }
-    >
+    <StyledModal>
       <div>
         <div>
           <StyledText typeText="title" color="--gray0" tag="h2">
             Cadastrar Tecnologia
           </StyledText>
-          <button onClick={() => setNewTech(false)}>X</button>
+          <button onClick={() => verifyNewTech()}>X</button>
         </div>
         <form onSubmit={handleSubmit(createNewTech)}>
           <label htmlFor="name">Nome</label>

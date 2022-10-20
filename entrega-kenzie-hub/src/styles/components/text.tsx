@@ -1,6 +1,12 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
-export function Text({ children, className, tag }) {
+interface iTextProps {
+  children: ReactNode;
+  className?: string;
+  tag: string;
+}
+
+export function Text({ children, className, tag }: iTextProps) {
   return (
     <>
       {tag === "h1" && <h1 className={className}>{children}</h1>}
