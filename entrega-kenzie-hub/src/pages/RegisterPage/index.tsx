@@ -1,13 +1,23 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { StyledMain } from "./style.js";
-import { BtnStyled } from "../../styles/components/styledButton/index.js";
-import { StyledInput } from "../../styles/components/styledInput/index.js";
-import { StyledText } from "../../styles/typography.js";
+import { StyledMain } from "./style";
+import { BtnStyled } from "../../styles/components/styledButton/index";
+import { StyledInput } from "../../styles/components/styledInput/index";
+import { StyledText } from "../../styles/typography";
 import { useContext } from "react";
-import { userContext } from "../../contexts/userContext.js";
+import { userContext } from "../../contexts/userContext";
 import { Link } from "react-router-dom";
+
+export interface iCreateUser {
+  email: string;
+  password: string;
+  name: string;
+  bio: string;
+  contact: string;
+  course_module: string;
+  confirmPassword?: string;
+}
 
 export function RegisterPage() {
   const { createUser } = useContext(userContext);
@@ -35,7 +45,7 @@ export function RegisterPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm<iCreateUser>({ resolver: yupResolver(schema) });
 
   return (
     <StyledMain>

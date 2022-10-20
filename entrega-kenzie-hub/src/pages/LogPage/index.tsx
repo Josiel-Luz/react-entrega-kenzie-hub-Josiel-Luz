@@ -9,6 +9,11 @@ import { BtnStyled } from "../../styles/components/styledButton";
 import { useContext } from "react";
 import { userContext } from "../../contexts/userContext";
 
+export interface iLogin {
+  email: string;
+  password: string;
+}
+
 export function LoginPage() {
   const { login } = useContext(userContext);
 
@@ -20,7 +25,7 @@ export function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm<iLogin>({ resolver: yupResolver(schema) });
 
   return (
     <StyledMain>
@@ -28,7 +33,7 @@ export function LoginPage() {
         Kenzie Hub
       </StyledText>
       <form onSubmit={handleSubmit(login)}>
-        <StyledText color="--gray0" TipeText="title" tag="h2">
+        <StyledText color="--gray0" typeText="title" tag="h2">
           Login
         </StyledText>
         <label htmlFor="email">Email</label>

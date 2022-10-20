@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const BtnStyled = styled.button`
+interface iBtnStyledProps {
+  btnType?: string;
+}
+
+export const BtnStyled = styled.button<iBtnStyledProps>`
   padding: 10px 20px;
   border-radius: 4px;
   border: 2px solid transparent;

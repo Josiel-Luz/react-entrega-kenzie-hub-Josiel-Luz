@@ -1,7 +1,13 @@
 import styled, { css } from "styled-components";
+import { string } from "yup";
 import { Text } from "./components/text";
 
-export const StyledText = styled(Text)`
+interface iStyledTextProps {
+  color: string;
+  typeText: string;
+}
+
+export const StyledText = styled(Text)<iStyledTextProps>`
   color: ${({ color }) => `var(${color})`};
 
   ${({ typeText }) => {

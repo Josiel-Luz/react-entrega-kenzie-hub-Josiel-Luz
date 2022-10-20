@@ -1,11 +1,11 @@
 import { useContext, useLayoutEffect } from "react";
-import { techsContext } from "../../contexts/techsContext";
+import { iTech, techsContext } from "../../contexts/techsContext";
 import { userContext } from "../../contexts/userContext";
 import { StyledText } from "../../styles/typography";
 import { StyledTechList } from "./style";
 
 export function TecnologiList() {
-  const { techs, setTechs } = useContext(userContext);
+  const { techs, removeTech } = useContext(userContext);
   const { deleteTech } = useContext(techsContext);
 
   return (
@@ -22,7 +22,7 @@ export function TecnologiList() {
               </StyledText>
               <button
                 onClick={() => {
-                  setTechs(techs.filter((tech) => tech.title !== elem.title));
+                  removeTech(elem);
                   deleteTech(elem.id);
                 }}
               >
