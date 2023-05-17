@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { string } from "yup";
 import { Text } from "./components/text";
 
 interface iStyledTextProps {
