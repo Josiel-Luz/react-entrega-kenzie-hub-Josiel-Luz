@@ -10,28 +10,36 @@ export function TecnologiList() {
 
   return (
     <StyledTechList>
-      {techs.map((elem) => {
-        return (
-          <li key={elem.id}>
-            <StyledText typeText="title" color="--gray0" tag="h3">
-              {elem.title}
-            </StyledText>
-            <div>
-              <StyledText typeText="text1" color="--gray1" tag="p">
-                {elem.status}
+      {techs.length > 0 ? (
+        techs.map((elem) => {
+          return (
+            <li key={elem.id}>
+              <StyledText typeText="title" color="--gray0" tag="h3">
+                {elem.title}
               </StyledText>
-              <button
-                onClick={() => {
-                  removeTech(elem);
-                  deleteTech(elem.id);
-                }}
-              >
-                X
-              </button>
-            </div>
-          </li>
-        );
-      })}
+              <div>
+                <StyledText typeText="text1" color="--gray1" tag="p">
+                  {elem.status}
+                </StyledText>
+                <button
+                  onClick={() => {
+                    removeTech(elem);
+                    deleteTech(elem.id);
+                  }}
+                >
+                  X
+                </button>
+              </div>
+            </li>
+          );
+        })
+      ) : (
+        <li>
+          <StyledText typeText="title" color="--gray0" tag="h3">
+            Você ainda não cadastrou nenhuma tecnologia
+          </StyledText>
+        </li>
+      )}
     </StyledTechList>
   );
 }
